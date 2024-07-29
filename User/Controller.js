@@ -26,7 +26,7 @@ const getusersById = (req, res) => {
 const addUsers=(req,res)=>{
     const { name, email, age, dob,password } = req.body;
 
-      //hash the password
+      //hash password
     bcrypt.hash(password,10,(error, hashedPassword)=>{
      if(error) throw error;
    
@@ -38,7 +38,7 @@ const addUsers=(req,res)=>{
         return res.status(400).send('Email already taken!');
       }
   
-      // Add users to the db with hash passwords
+      // Add users to the db with hashpasswords
       pool.query(queries.addUsers, [name, email, age, dob,hashedPassword], (error, results) => {
         if (error) throw error;
         res.status(201).send('User created successfully!');
@@ -50,10 +50,9 @@ const addUsers=(req,res)=>{
 const deleteusers=(req,res) => {
     const id=parseInt(req.params.id);
     pool.query(queries.deleteusers,[id],(error,results)=>{
-
-        if (error) throw error;
+           if (error) throw error;
     
-        const userNotFound=results.rows.length===0;
+        const userNotFound=!results.rows.length===0;
         if(userNotFound){
           return  res.status(404).send('That user is not existed in the database!')
         }

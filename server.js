@@ -11,8 +11,12 @@ app.get("/", (req, res) => {
     res.send("Welcome to the API!");
 });
 
+
 // Users routes
-app.use('/api/v1/userdb', usersRoutes);
+app.use('/api/v1/userdb/users', usersRoutes);
+
+//expense routes
+app.use('/api/v1/userdb/expenses', expenseRoutes);
 
 
 
