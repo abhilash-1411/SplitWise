@@ -1,5 +1,6 @@
 const express = require('express');
 const usersRoutes = require('./User/Routes');
+const expenseRoutes=require('./Expenses/ExpenseRoutes');
 
 const app = express();
 const port = 3001; 
@@ -11,7 +12,10 @@ app.get("/", (req, res) => {
 });
 
 // Users routes
-app.use('/api/v1/userdb', usersRoutes);
+// app.use('/api/v1/userdb', usersRoutes);
+
+//Expense routes
+app.use('/api/v1/expenses', expenseRoutes);
 
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
